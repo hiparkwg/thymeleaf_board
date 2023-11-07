@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<typeAliases>
+		<typeAlias type="kr.jobtc.board.BoardVo"  alias="BoardVo" />
+		<typeAlias type="kr.jobtc.board.Page"     alias="Page" />
+		<typeAlias type="kr.jobtc.board.MemberVo" alias="MemberVo" />
+		<typeAlias type="kr.jobtc.board.ReplVo"   alias="ReplVo" />
+	</typeAliases>
+
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="com.mysql.cj.jdbc.Driver" />
+				<property name="url"
+					value="jdbc:mysql://localhost:3306/easy" />
+				<property name="username" value="jobtc" />
+				<property name="password" value="1111" />
+			</dataSource>
+		</environment>
+	</environments>
+
+	<mappers>
+		<mapper resource="kr/jobtc/mybatis/board.xml" />
+	</mappers>
+</configuration>
+

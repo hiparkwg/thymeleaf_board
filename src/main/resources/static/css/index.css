@@ -1,0 +1,167 @@
+@charset "UTF-8";
+*{
+	box-sizing: border-box;
+	line-height: 1.5em;
+}
+body{
+	overflow-y: scroll;
+}
+
+#main{
+	margin:10px auto;
+	border:0px solid #666;
+	min-width:720px;
+}
+#main .loginZone{
+	height:40px;
+	line-height: 40px;
+	text-align: right;
+	margin-right:15px;
+}
+#main .header{
+	height:160px;
+	padding:15px;
+	border:0px solid  #999;
+	background-color: #333;
+	border-radius: 10px;
+	font-size:1.5em;
+	color:#fff;
+	position: relative;
+}
+#main .header>nav{
+	position: absolute;
+	right:15px;
+	bottom:5px;
+}
+#main .header>nav>button{
+	float:left;
+	width:90px;
+	height: 30px;
+	border:0;
+}	
+#main .header>nav>button:hover{
+	cursor: pointer;
+	background-color: #666;
+	color:#fff;	
+	border-width:2px;
+}	
+
+#main .header>nav>button:first-child{
+	border-radius: 15px 0 0 15px;
+}	
+
+#main .header>nav>button:last-child{
+	border-radius: 0 15px 15px 0;
+}	
+
+#main .findZone{
+	text-align: center;
+	margin-top:3px;
+	
+}
+#main .findZone>*{
+	height:28px;
+	vertical-align: middle;
+}	
+#main .section{
+	display: grid;
+	margin:10px auto;
+}
+@media screen and (min-width: 800px){
+	#main .section{
+		grid-template-columns: 1fr;
+		justify-content: center;
+		padding: 30px;
+
+	}
+}
+@media screen and (min-width: 1100px){
+	#main .section{
+		grid-template-columns: 1fr 1fr;
+		justify-content: center;
+		padding: 30px;
+	}
+}
+@media screen and (min-width: 1400px){
+	#main .section{
+		grid-template-columns: 1fr 1fr 1fr;
+		justify-content: center;
+		padding: 30px;
+	}
+}
+
+
+
+
+/* 더 보기 링크 */
+#main .moreList:hover{
+	background-color: #ddd;
+	cursor: pointer;
+	color:#000;
+	border-radius: 15px;;
+	
+}
+#main .section .row:hover{
+	background-color: #ddd;
+	cursor: pointer;
+}
+
+
+/* top10 -------------- */
+.top10 {
+	border : 2px solid #555;
+	padding:15px;
+	border-radius:10px;
+	margin:10px;
+}
+.top10>legend{
+	background-color: #444;
+	color:#fff;
+	padding:6px 26px;
+	border-radius: 14px;
+}
+
+.top10 .title{
+	background-color: #999;
+	display: grid;
+	grid-template-columns: 1fr 3fr 1fr 1fr 1fr;
+	padding:0 15px;
+}
+.top10 .row{
+	display: grid;
+	grid-template-columns: 1fr 3fr 1fr 1fr 1fr;
+}
+
+ 
+.top10 .no{ 
+	width: 42px; 
+}
+.top10 .subject{ 
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.top10 .id { 
+	width:100px;
+}
+.top10 .hit{ 
+	width:70px; 
+	text-align: right;
+	padding-right:16px;
+}
+.top10 .nal{ 
+	width:100px;
+}
+
+/* footer --------------- */
+#main .footer{
+	height:120px;
+	line-height: 110px;
+	border:0px solid  #999;
+	border-radius: 10px;
+	background-color: #333;
+	text-align: center;
+	font-size:1.2em;
+	color:#fff;
+	
+}

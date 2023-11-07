@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>왁자지껄</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+	<div class='here' >...</div>
+
+	<script>
+		let su=1;
+		let txt='';
+		async function a(){
+			console.log('text 1', txt);
+			txt =await b();
+			console.log('text 2', txt);
+			
+		}
+		
+		function b(){
+			su=100;
+			txt = $.ajax({url:'./test_doc.txt'});
+			return txt;
+		}
+		
+		a();
+	
+	</script>
+
+	
+	
+
+</body>
+</html>

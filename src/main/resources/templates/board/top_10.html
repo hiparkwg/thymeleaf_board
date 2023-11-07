@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>top 10</title>
+</head>
+
+<body>
+	<fieldSet class="top10">
+		
+		<legend class="subTitle">
+			<span th:text="${subTitle}"/>
+			<span th:menu = "${menu}"
+					th:onclick = "more(this.getAttribute('menu'))"
+					class="moreList">[더 보기...]</span>
+		</legend>
+		
+
+		<div class="title">
+			<span class="no">NO</span>
+			<span class="subject">제목</span>
+			<span class="id">작성자</span>
+			<span class="hit">조회수</span>
+			<span class="nal">날짜</span>
+		</div>
+		<div>
+			<div th:each="vo : ${top10List}" class="row"
+					th:menu="${menu}"  th:sno="${vo.sno}"
+					th:onclick="|go(${voStat.index}, this.getAttribute('menu'))|" >
+				<span class="no"      th:text="${vo.sno}" />
+				<span class="subject" th:text="${vo.subject}" />
+				<span class="id"      th:text="${vo.id}" />
+				<span class="hit"     th:text="${vo.hit}" />
+				<span class="nal"     th:text="${#strings.substring(vo.nal, 0,10)}" />
+			</div>
+		</div>
+	</fieldSet>
+
+</body>
+
+</html>

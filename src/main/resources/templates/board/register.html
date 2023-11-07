@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>게시하기</title>
+	<link rel="stylesheet" href="css/board.css">
+
+</head>
+
+<body>
+	<div class="register">
+		<h2>Register...</h2>
+		<form name="frmRegister">
+			<span>작성자</span>
+			<input name="id" th:value="${session.id}" readOnly />
+			<br />
+			<span>제목</span>
+			<input name="subject" class='subject' size="80">
+			<br />
+			<textarea name="doc" class='doc' ></textarea>
+			<br />
+			<button type="button" class="btnRegisterR" 
+			        th:onclick="registerR(this.form)">작성</button>
+			<button type="button" class="btnCancel" th:onclick="setMenu()">취소</button>
+			
+		</form>
+	</div>
+</body>
+
+
+</html>

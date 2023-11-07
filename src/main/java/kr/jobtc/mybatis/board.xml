@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper      
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"      
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="board">
+
+	<select id="login" parameterType="MemberVo" resultType="String">
+		select name from member
+		where id=#{id} and pwd=#{pwd}
+	</select>
+
+
+
+	<!-- register  -->
+	<insert id="registerR" parameterType="BoardVo">
+		insert into board(id, subject, doc, hit, nal )
+		values(#{id}, #{subject},#{doc}, 0, now())
+	</insert>
+	
+	<insert id="registerRepl" parameterType="ReplVo">
+		insert into repl(id, doc, pSno, nal)
+		values( #{id}, #{doc}, #{pSno}, now())
+	</insert>
+	
+	<select id="view" parameterType="Integer" resultType="BoardVo">
+		select * from board where sno = #{_parameter}
+	</select>
+	
+	
+
+
+	<select id="hitTop10" resultType="BoardVo" parameterType="Page">
+		select * from board 
+		
+		<where>
+			<if test="findStr != null">
+				id = #{findStr} 
+				or doc like '%${findStr}%'
+				or subject like '%${findStr}%'
+			</if>
+		</where>
+		order by hit desc, sno desc
+		
+		<choose>
+			<when test="limitType eq 'top10' ">
+				limit 0,10
+			</when>
+			<when test="limitType  eq 'all' ">
+				limit #{startNo}, #{listSize}
+			</when>
+		</choose>
+		
+	</select>
+	
+	
+	
+	<select id="replTop10" resultType="BoardVo" parameterType="Page">
+		select *, (select count(sno) from repl 
+		where   board.sno = repl.pSno group by pSno) replCnt  
+		from    board
+		
+		<where>
+			<if test="findStr != null">
+				id = #{findStr} 
+				or doc     like '%${findStr}%'
+				or subject like '%${findStr}%'
+			</if>
+		</where>
+		
+		order by replCnt desc, sno desc
+
+		<choose>
+			<when test="limitType eq 'top10'">
+				limit 0,10
+			</when>
+			<when test="limitType eq 'all'">
+				limit #{startNo}, #{listSize}
+			</when>
+		</choose>
+		
+	</select>
+
+	<select id="newerTop10" resultType="BoardVo" parameterType="Page">
+		select * from board
+		
+		<where>
+			<if test="findStr != null">
+				id = #{findStr} 
+				or doc     like '%${findStr}%'
+				or subject like '%${findStr}%'
+			</if>
+		</where>
+		
+		order by sno desc, hit desc
+
+		<choose>
+			<when test="limitType eq 'top10'">
+				limit 0,10
+			</when>
+			<when test="limitType eq 'all'">
+				limit #{startNo}, #{listSize}
+			</when>
+		</choose>
+	</select>
+
+
+	<select id="replList" parameterType="Integer" resultType="BoardVo">
+		select * from repl where pSno = #{_parameter}
+		order by sno desc
+		
+	</select>
+
+	
+	
+	<!--  검색어에 따른 행수 리턴 -->
+	<select id="totSize" resultType="Integer" parameterType="Page">
+		select count(sno) totSize from board 
+		where id = #{findStr}  
+		or 	subject like '%${findStr}%'
+		or    doc like '%${findStr}%'
+		    
+	</select>
+	
+	<!--  view -->
+	<!--  조회수 증가 -->
+	<update id="hitUpdate" parameterType="Integer">
+		update board set hit=hit+1 where sno=#{_parameter}
+	</update>
+
+
+	<!-- update  -->
+	<update id="update" parameterType="BoardVo">
+		update board set subject=#{subject}, doc = #{doc}
+		where sno = #{sno}
+	</update>
+	
+	
+	<!-- delete -->
+	<!--  글 삭제시 댓글의 유무 체크 -->
+	<select id="checkRepl" parameterType="BoardVo" resultType="Integer">
+		select count(sno) from repl where pSno = #{sno}  
+
+	</select>
+	
+	<delete id="delete" parameterType="Integer">
+		delete from board where sno=#{_parameter}
+	</delete>
+	
+	
+	<update id="updateRepl" parameterType="ReplVo">
+		update repl set doc=#{doc} where sno = #{sno}
+	</update>
+	
+	<delete id="delRepl" parameterType="Integer">
+		delete from repl where sno = #{_parameter}
+	</delete>
+
+
+
+</mapper>

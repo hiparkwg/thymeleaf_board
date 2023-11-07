@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<link rel="stylesheet" href="css/board.css"/>
+
+</head>
+
+<body>
+	<div class="replList">
+		<h2>본문글...</h2>
+		<form name="frmRegister" class="frmRegister">
+			<span>작성자</span>
+			<input name="id" th:value="${vo.id}" readOnly>
+			<output th:text="${vo.nal}"/>
+			<br />
+			<input name="subject" class="subject" th:value="${vo.subject}"><br />
+			<textarea name="doc" class="doc" th:text="${vo.doc}"></textarea>
+			<input type="hidden" name="sno" th:value="${sno}"/>
+
+			<th:block th:if="${session.id == vo.id}">
+				<br/>
+				<button type="button" onclick="modify(this.form)">수정</button>
+				<button type="button" onclick="del(this.form)">삭제</button>
+			</th:block>
+			
+		</form>
+
+		<h3>댓글...</h3>
+		<form name="frmRegisterRepl" class="frmRegisterRepl">
+			<span>작성자</span>
+			<input name="id" th:value="${session.id}" readOnly><br />
+			<textarea name="doc" cols="80" rows="5" class="doc"></textarea>
+			<input type="hidden" name="pSno" th:value="${sno}"/>
+			
+			<th:block th:if="${session.id != null} ">
+				<br/>
+				<button type="button" onclick="registerRepl(this.form)">댓글 작성</button>
+			</th:block>
+			
+		</form>
+		<hr />
+		
+		<div class="replListZone">
+			<div th:each="vo : ${list}" >
+				<form name="frmReplList">
+					<span>작성자</span>
+					<input name="id" th:value="${vo.id}" readOnly />
+					<th:block th:text="${vo.nal}" />
+
+					<th:block th:if="${session.id == vo.id}">
+						<button type="button" th:onclick="modifyReplR(this.form)">수정</button>
+						<button type="button" th:onclick="delReplR(this.form)">삭제</button>
+					</th:block>
+					<br/>
+					
+					<textarea name="doc" class="replDoc"  cols="80" rows="5" 
+					          th:text="${vo.doc}" /></textarea>
+					<input type="hidden" name="sno" th:value="${vo.sno}"/>
+					<br/>
+				</form>
+
+			</div>
+		</div>
+
+	</div>
+</body>
+
+</html>

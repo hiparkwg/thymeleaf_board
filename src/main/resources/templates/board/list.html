@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<link rel="stylesheet" href="css/board.css"/>
+	
+</head>
+
+<body>
+	<div class="list">
+		<div class="subTitle">
+			<h2>List</h2>
+			<div class="pageZone" th:if="${page != null }">
+
+				<th:block th:if="${page.nowPage gt 1}">
+					<button type="button" th:onclick="|move(${page.nowPage-1})|">&lt</button>
+				</th:block>
+
+				<th:block th:if="${page.totPage gt page.nowPage}">
+					<button type="button" th:onclick="|move(${page.nowPage+1})|">&gt</button>
+				</th:block>
+
+			</div>
+		</div>
+
+		<div class="title">
+			<span class="no">NO</span>
+			<span class="subject">제목</span>
+			<span class="id">작성자</span>
+			<span class="hit">조회수</span>
+			<span class="nal">날짜</span>
+		</div>
+		<div>
+			<div th:each="vo : ${list}" class="row" th:sno = "${vo.sno}"
+				  th:onclick="|replList(${voStat.index})|">
+				<span class="no" th:text="${vo.sno}" />
+				<span class="subject" th:text="${vo.subject}" />
+				<span class="id"  th:text="${vo.id}" />
+				<span class="hit" th:text="${vo.hit}" />
+				<span class="nal" th:text="${#strings.substring(vo.nal,0,10)}" />
+			</div>
+		</div>
+		
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div th:fragment="login">
+		<form name="frmLogin" class="frmLogin">
+			<span>아이디</span>
+			<input name="id" size="8" value="a001">
+			<span>암호</span>
+			<input name="pwd" size="8" value="1111">
+			<button type="button" class="btnLogin" onclick="login(this.form)">로그인</button>
+		</form>
+	</div>
+	
+	<div th:fragment="logout">
+		<form name="frmLogin" class="frmLogin">
+			<span th:text="|[ ${session.name} ]님 반가워요|" />
+			<button type="button" class="btnLogout" onclick="logout()">로그아웃</button>
+		</form>
+	</div>
+	
+</body>
+</html>
